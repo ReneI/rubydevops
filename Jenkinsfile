@@ -35,11 +35,7 @@ agent none
       steps {
         sh 'rake ci:all'
       }
-      post {
-        always {
-          junit '**/test-reports/*.xml'
-        }
-      } 
+     
     }
       
             stage('Static Analisis') {

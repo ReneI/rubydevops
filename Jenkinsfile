@@ -15,9 +15,7 @@ pipeline {
     }
     
          stage('Quality') {
-            agent { docker { image 'openjdk' }
-        }
-                   steps {
+              steps {
                        
                        script {
                           def scannerHome = tool 'SonarQubeScanner3';
@@ -32,14 +30,14 @@ pipeline {
     
             stage('Code Quality') {
                 agent {
-            docker { image 'openjdk' }
+            docker { image 'openjdk:8' }
         }
                    steps {
                
                        script {
                           def scannerHome = tool 'SonarQubeScanner3';
                           withSonarQubeEnv("SonarQube") {
-                          sh "sudo su ${scannerHome}/bin/sonar-scanner"
+                          sh "${scannerHome}/bin/sonar-scanner"
                                        }
                                }
                            }

@@ -8,6 +8,7 @@ agent none
         }
 
       steps {
+        sh 'gem install bundler -v 2.0.1'
         sh 'bundle install'
       }
     }

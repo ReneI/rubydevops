@@ -6,10 +6,7 @@ agent none
     dockerImage = ''
 
   }
-   environment {
-    registry = "docker_hub_account/repository_name"
-    registryCredential = 'dockerhub'
-  }
+ 
   stages {
     stage('build') {
         agent { 

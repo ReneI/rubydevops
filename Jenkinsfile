@@ -39,7 +39,7 @@ agent none
           junit '**/test-reports/*.xml'
         }
       } 
-      
+    }
       
             stage('Static Analisis') {
                 agent {
@@ -57,7 +57,7 @@ agent none
                         }
 
    
-    }
+    
   }
 }
 

@@ -14,19 +14,7 @@ pipeline {
       }
     }
     
-         stage('Quality') {
-              steps {
-                       
-                       script {
-                          def scannerHome = tool 'SonarQubeScanner3';
-                          withSonarQubeEnv("SonarQube") {
-                          sh "${scannerHome}/bin/sonar-scanner"
-
-                          }
-                               }
-                           }
-                        }
-    
+        
     
     
             stage('Code Quality') {
@@ -43,6 +31,19 @@ pipeline {
                                }
                            }
                         }
+     stage('Quality') {
+              steps {
+                       
+                       script {
+                          def scannerHome = tool 'SonarQubeScanner3';
+                          withSonarQubeEnv("SonarQube") {
+                          sh "${scannerHome}/bin/sonar-scanner"
+
+                          }
+                               }
+                           }
+                        }
+    
 
       stage('lint') {
       steps {

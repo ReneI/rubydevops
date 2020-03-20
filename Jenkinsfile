@@ -32,7 +32,7 @@ pipeline {
     
             stage('Code Quality') {
                 agent {
-            docker { image 'jdk7_image' }
+            docker { image 'openjdk:8' }
         }
                    steps {
                

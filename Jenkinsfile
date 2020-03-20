@@ -14,14 +14,14 @@ pipeline {
       }
     }
     
-         stage('Code Quality') {
+         stage('Quality') {
                    steps {
                
                        script {
                           def scannerHome = tool 'SonarQubeScanner3';
                           withSonarQubeEnv("SonarQube") {
-                          sh "sudo ${scannerHome}/bin/sonar-scanner"
-                                       }
+                              sh 'mvn clean package sonar:sonar'
+                                         }
                                }
                            }
                         }

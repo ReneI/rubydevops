@@ -15,9 +15,10 @@ pipeline {
     }
     
          stage('Quality') {
-                   steps {
-                        agent { docker { image 'jdk7_image' }
+            agent { docker { image 'openjdk:8' }
         }
+                   steps {
+                       
                        script {
                           def scannerHome = tool 'SonarQubeScanner3';
                           withSonarQubeEnv("SonarQube") {

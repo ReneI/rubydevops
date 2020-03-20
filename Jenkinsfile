@@ -1,5 +1,15 @@
 pipeline {
 agent none
+  environment {
+    registry = "renesito/ruby-accenture:tagname"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+
+  }
+   environment {
+    registry = "docker_hub_account/repository_name"
+    registryCredential = 'dockerhub'
+  }
   stages {
     stage('build') {
         agent { 
@@ -59,6 +69,37 @@ agent none
 
    
     
+       stage('Cloning Git') {
+      steps {
+        git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'
+      }
+    }
+     stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    
+    
+    
+    
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+    
     
     
             stage('Deliver for development') {
@@ -67,17 +108,15 @@ agent none
             }
             steps {
                 sh './jenkins/scripts/deliver-for-development.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
         }
         stage('Deploy for production') {
             when {
-                branch 'production'
+                branch 'master'
             }
             steps {
                 sh './jenkins/scripts/deploy-for-production.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh './jenkins/scripts/kill.sh'
             }
         }

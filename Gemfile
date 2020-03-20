@@ -12,7 +12,7 @@ group :test do
   gem 'minitest'
   gem 'rack-test'
   gem "ci_reporter"
-  gem 'ci_reporter_test_unit'
+  gem 'ci_reporter_minitest'
   gem "rspec"
   gem "rspec_junit_formatter"
 end

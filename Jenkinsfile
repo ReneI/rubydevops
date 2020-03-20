@@ -33,7 +33,11 @@ agent none
               agent { docker { image 'ruby:2.6.1' } }
 
       steps {
+          try {
         sh 'rake'
+  } catch (Exception e) {
+      sh 'error'
+  }   
       }
      
     }

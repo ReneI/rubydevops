@@ -33,7 +33,7 @@ agent none
               agent { docker { image 'ruby:2.6.1' } }
 
       steps {
-        sh 'rake ci:all'
+        sh 'rake'
       }
      
     }

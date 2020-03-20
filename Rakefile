@@ -1,11 +1,11 @@
 require 'rake/testtask'
-require 'ci/reporter/rake/test_unit'
+require 'ci/reporter/rake/minitest'
 
 task default: %i(test)
-task testunit: 'ci:setup:testunit'
+task minitest: 'ci:setup:minitest'
 
 namespace :ci do
-  task :all => ['ci:setup:testunit', 'test']
+  task :all => ['ci:setup:minitest', 'test']
 end
 
 Rake::TestTask.new do |t|
